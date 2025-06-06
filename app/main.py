@@ -3,7 +3,7 @@ from app.routers import simulacao_router
 
 # Instancia principal da aplicação FastAPI e a descreve para documentação automática.
 app = FastAPI(
-    title="API de Simulação de Financiamento",
+    title="API de Simulação de Financiamento de Imóvel",
     description="Uma API REST para simular cálculos de financiamento imobiliário no modelo da aMORA. Acesse /docs para a documentação interativa.",
     version="0.1.0"
 )
