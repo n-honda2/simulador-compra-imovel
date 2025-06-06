@@ -95,14 +95,14 @@ uvicorn app.main:app --reload
 ```
 
   * The API will be available at: `http://127.0.0.1:8000`
-  * Access the **interactive documentation (Swagger UI)** at: `http://127.0.0.1:8000/docs`
+  * Access the **interactive documentation (Swagger UI)** at: `http://127.00.0.1:8000/docs`
   * View the ReDoc documentation at: `http://127.0.0.1:8000/redoc`
 
 -----
 
 ## 📝 API Documentation and Usage
 
-This API is **self-documenting** through the **OpenAPI (Swagger)** standard, providing a fully interactive interface to explore and test its endpoints. You can access it directly at `http://127.0.0.1:8000/docs` when the API is running.
+This API is **self-documenting** through the **OpenAPI (Swagger)** standard, providing a fully interactive interface to explore and test its endpoints. You can access it directly at `http://127.0.0.1:8000/docs` or `http://127.0.0.1:8000/redoc` when the API is running.
 
 The API simulates real estate financing via a **`POST`** request to the `/simulacao` endpoint. This endpoint calculates essential financing details, including the down payment amount, the financed amount, the total savings required, and the estimated monthly installment. Input data validation is automatically handled, ensuring parameters are within expected ranges and types.
 
@@ -139,20 +139,22 @@ The API simulates real estate financing via a **`POST`** request to the `/simula
 
 -----
 
-### Usage Example with cURL
+## 👨‍💻 Code Maintenance Guidelines
 
-You can test this endpoint using cURL in your terminal:
+To ensure the long-term quality, readability, and consistency of this codebase, please adhere to the following guidelines when contributing:
 
-```bash
-curl -X POST \
-  http://127.0.0.1:8000/simulacao \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "valor_imovel": 400000,
-    "percentual_entrada": 5,
-    "anos_contrato": 3
-  }'
-```
+  * **Modular Architecture:** Always maintain the established modular structure with clear separation of concerns (e.g., `schemas`, `services`, `routers`). Each module should have a single, well-defined responsibility.
+  * **Clear Code:** Write clean, concise, and self-documenting code. Prefer simple solutions over complex ones.
+  * **Docstrings:** Provide comprehensive docstrings for all functions, classes, and methods, explaining their purpose, arguments, and return values. This is crucial for understanding the codebase.
+  * **Naming Conventions:** Follow Python's [PEP 8](https://peps.python.org/pep-0008/) naming conventions (e.g., `snake_case` for functions and variables, `PascalCase` for classes).
+  * **Error Handling:** Implement robust error handling mechanisms, ensuring that unexpected situations are gracefully managed and provide informative responses.
+  * **Version Control & Git Flow:**
+      * Utilize **Git** for all code changes.
+      * Follow a **Git Flow** or a similar branching strategy (e.g., Feature Branch Workflow) to manage development. All new features or bug fixes should be developed in dedicated branches (e.g., `feature/nome-da-feature`, `bugfix/descricao-do-bug`) originating from `main` (or `develop`).
+      * Ensure **small, atomic commits** with clear and descriptive commit messages that explain *what* was changed and *why*.
+      * **Recommendation: Use Gitmojis\!** Consider incorporating [Gitmojis](https://gitmoji.dev/) into your commit messages. They provide a visual and standardized way to categorize the type and intent of each commit, making the commit history more readable and scannable. For example: `✨ feat: add new simulation endpoint` or `🐛 fix: correct calculation bug`.
+      * **Rebase** your feature branches frequently with the main branch to avoid large merge conflicts.
+      * Use **Pull Requests (PRs)** for all merges into `main` (or `develop`). PRs should include a clear description of the changes and link to any relevant issues. Code reviews are encouraged before merging.
 
 -----
 
