@@ -1,0 +1,10 @@
+# Ignora o ambiente virtual que roda localmente
+venv/
+.venv/
+env/
+.env/
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+.pytest_cache/
