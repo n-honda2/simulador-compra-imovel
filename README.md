@@ -185,11 +185,31 @@ This project includes **unit and integration tests** to ensure the robustness an
 To ensure the long-term quality, readability, and consistency of this codebase, please adhere to the following guidelines when contributing:
 
   * **Modular Architecture:** Always maintain the established modular structure with clear separation of concerns (e.g., `schemas`, `services`, `routers`). Each module should have a single, well-defined responsibility.
+
   * **Clear Code:** Write clean, concise, and self-documenting code. Prefer simple solutions over complex ones.
+
   * **Docstrings:** Provide comprehensive docstrings for all functions, classes, and methods, explaining their purpose, arguments, and return values. This is crucial for understanding the codebase.
+
   * **Naming Conventions:** Follow Python's [PEP 8](https://peps.python.org/pep-0008/) naming conventions (e.g., `snake_case` for functions and variables, `PascalCase` for classes).
+
   * **Error Handling:** Implement robust error handling mechanisms, ensuring that unexpected situations are gracefully managed and provide informative responses.
+
+  * **Code Linting & Formatting:**
+
+      * We use automatic code formatters and linters to maintain consistent style and catch potential issues early.
+      * **Black** (code formatter): Ensures consistent code formatting automatically.
+      * **isort** (import sorter): Organizes and sorts imports automatically.
+      * **Flake8** (linter): Checks for style inconsistencies (PEP 8) and common programming errors.
+      * **How to Run:** Ensure you have these tools installed in your virtual environment (`pip install flake8 black isort`). You can run them manually from the project root:
+        ```bash
+        black app/
+        isort app/
+        flake8 app/
+        ```
+      * **Pre-commit Hooks:** It's highly recommended to set up `pre-commit` hooks (`pip install pre-commit` then `pre-commit install`) to automatically run these checks before every `git commit`, preventing inconsistent code from entering the repository.
+
   * **Version Control & Git Flow:**
+
       * Utilize **Git** for all code changes.
       * Follow a **Git Flow** or a similar branching strategy (e.g., Feature Branch Workflow) to manage development. All new features or bug fixes should be developed in dedicated branches (e.g., `feature/nome-da-feature`, `bugfix/descricao-do-bug`) originating from `main` (or `develop`).
       * Ensure **small, atomic commits** with clear and descriptive commit messages that explain *what* was changed and *why*.
