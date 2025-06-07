@@ -10,16 +10,14 @@ This API is designed to simulate real estate financing, calculating key values l
 
 ## 📚 Table of Contents
 
-## 📚 Table of Contents
-
-* [🚀 Key Features](#key-features)
-* [🛠️ Technologies Used](#technologies-used)
-* [⚙️ Setup and Local Execution](#setup-and-local-execution)
-* [🐳 Docker Deployment](#docker-deployment)
-* [📝 API Documentation and Usage](#api-documentation-and-usage)
-* [✅ Tests](#tests)
-* [👨‍💻 Code Maintenance Guidelines](#code-maintenance-guidelines)
-* [📄 License](#license)
+* [🚀 Key Features](#-key-features)
+* [🛠️ Technologies Used](#-technologies-used)
+* [⚙️ Setup and Local Execution](#-setup-and-local-execution)
+* [🐳 Docker Deployment](#-docker-deployment)
+* [📝 API Documentation and Usage](#-api-documentation-and-usage)
+* [✅ Tests](#-tests)
+* [👨‍💻 Code Maintenance Guidelines](#-code-maintenance-guidelines)
+* [📄 License](#-license)
 
 -----
 
