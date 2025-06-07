@@ -1,0 +1,8 @@
+# .flake8
+[flake8]
+max-line-length = 120
+extend-ignore = E203, E266, W503
+exclude = .git, __pycache__, venv, build, dist, .mypy_cache
+# E203: Ignora conflitos entre Flake8 e Black (Black adiciona espaço antes de ':').
+# E266: Ignora aviso sobre múltiplos espaços após pontuação.
+# W503: Ignora aviso sobre quebra de linha antes de um operador binário (Black formata assim).

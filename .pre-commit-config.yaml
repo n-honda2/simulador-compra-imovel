@@ -1,0 +1,23 @@
+# .pre-commit-config.yaml
+# Este arquivo configura as ferramentas que rodarão automaticamente antes de cada commit.
+repos:
+  # Repositório para o Flake8 (linter)
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0 # Use a versão mais recente disponível para flake8
+    hooks:
+      - id: flake8 # ID do hook flake8
+        # args: [] # Argumentos adicionais podem ser definidos aqui se não estiverem no .flake8
+
+  # Repositório para o isort (organizador de imports)
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2 # Use a versão mais recente disponível para isort
+    hooks:
+      - id: isort # ID do hook isort
+        args: ["--profile", "black"] # Garante que o isort siga o perfil de formatação do Black
+
+  # Repositório para o Black (formatador de código)
+  - repo: https://github.com/psf/black
+    rev: 24.3.0 # Use a versão mais recente disponível para black
+    hooks:
+      - id: black # ID do hook black
+        args: ["--line-length=120"] # Passa o argumento para o limite de linha
