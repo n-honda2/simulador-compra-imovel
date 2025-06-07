@@ -8,6 +8,19 @@ This API is designed to simulate real estate financing, calculating key values l
 
 -----
 
+## 📚 Table of Contents
+
+* [🚀 Key Features](#-key-features)
+* [🛠️ Technologies Used](#-technologies-used)
+* [⚙️ Setup and Local Execution](#-setup-and-local-execution)
+* [🐳 Docker Deployment](#-docker-deployment)
+* [📝 API Documentation and Usage](#-api-documentation-and-usage)
+* [✅ Tests](#-tests)
+* [👨‍💻 Code Maintenance Guidelines](#-code-maintenance-guidelines)
+* [📄 License](#-license)
+
+-----
+
 ## 🚀 Key Features
 
 The API provides a single, powerful endpoint for loan simulation:
@@ -22,6 +35,7 @@ The API provides a single, powerful endpoint for loan simulation:
   * **Web Server:** [Uvicorn](https://www.uvicorn.org/) (ASGI Server)
   * **Data Validation:** [Pydantic](https://pydantic.dev/)
   * **Dependency Management:** [Pip](https://pip.pypa.io/en/stable/) and [Venv](https://docs.python.org/3/library/venv.html)
+  * **Containerization:** [Docker](https://www.docker.com/)
 
 -----
 
@@ -35,6 +49,7 @@ Make sure you have the following installed:
 
   * [**Python 3.9+**](https://www.python.org/downloads/)
   * [**Git**](https://git-scm.com/downloads)
+  * [**Docker Desktop**](https://www.docker.com/products/docker-desktop) (for Windows/macOS) or [**Docker Engine**](https://docs.docker.com/engine/install/) (for Linux)
 
 ### 2\. Clone the Repository
 
@@ -83,12 +98,12 @@ Activate your `venv` to ensure you're using the correct Python environment:
 With your virtual environment active, install all required packages:
 
 ```bash
-pip install -r venv_requirements.txt
+pip install -r requirements.txt
 ```
 
-### 6\. Run the API
+### 6\. Run the API (Local Python Environment)
 
-To start the API server locally:
+To start the API server locally using your Python environment:
 
 ```bash
 uvicorn app.main:app --reload
@@ -97,6 +112,72 @@ uvicorn app.main:app --reload
   * The API will be available at: `http://127.0.0.1:8000`
   * Access the **interactive documentation (Swagger UI)** at: `http://127.0.0.1:8000/docs`
   * View the ReDoc documentation at: `http://127.0.0.1:8000/redoc`
+
+-----
+
+## 🐳 Docker Deployment
+
+For consistent and isolated execution across different environments, this project supports Docker. Docker bundles the application and all its dependencies into a single, portable unit.
+
+### 1\. Build the Docker Image
+
+Navigate to the project root directory (where `Dockerfile` is located) and build the image:
+
+```bash
+docker build -t simulacao-api .
+```
+
+  * `-t simulacao-api`: Assigns a name (tag) to your image.
+  * `.`: Specifies the current directory as the build context, telling Docker where to find the `Dockerfile` and other project files.
+
+### 2\. Run the Docker Container (API)
+
+After building the image, you can create and start a container from it. The `-p` flag maps the container's internal port to a port on your host machine, making the API accessible.
+
+```bash
+docker run -p 8000:8000 --name simulacao-api-container simulacao-api
+```
+
+  * `-p 8000:8000`: Maps port `8000` on your host machine to port `8000` inside the container.
+  * `--name simulacao-api-container`: Assigns a memorable name to your container.
+  * `simulacao-api`: The name of the Docker image you just built.
+
+The container will run in the foreground, displaying application logs. To run it in the background, add the `-d` flag:
+
+```bash
+docker run -d -p 8000:8000 --name simulacao-api-container simulacao-api
+```
+
+### 3\. Access the API (Docker)
+
+Once the container is running:
+
+  * **API Principal:** `http://localhost:8000/` or `http://127.0.0.1:8000/`
+  * **Interactive Documentation (Swagger UI):** `http://localhost:8000/docs`
+  * **ReDoc Documentation:** `http://localhost:8000/redoc`
+
+### 4\. Stop and Remove the Docker Container
+
+To stop a running container:
+
+```bash
+docker stop simulacao-api-container
+```
+
+To remove a stopped container (freeing up resources):
+
+```bash
+docker rm simulacao-api-container
+```
+
+### 5\. Run Tests with Docker (Optional: Requires `docker-compose.yml` for simplified setup)
+
+If you have a `docker-compose.yml` configured (as provided in previous discussions, with a `tests` service), you can run your tests inside a Docker container. This ensures your tests run in an isolated environment identical to your API's.
+
+```bash
+# From the project root where docker-compose.yml is located
+docker compose run --rm tests
+```
 
 -----
 
