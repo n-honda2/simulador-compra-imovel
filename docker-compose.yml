@@ -1,0 +1,43 @@
+# docker-compose.yml
+# Define a versão da sintaxe do Docker Compose.
+version: '3.8'
+
+# Define os serviços (contêineres) que compõem sua aplicação.
+services:
+  # Serviço principal da sua API.
+  api:
+    # Instruí o Docker Compose a construir a imagem a partir do Dockerfile no diretório atual (.).
+    build: .
+    # Mapeia as portas: host_port:container_port.
+    # A porta 8000 do seu computador será mapeada para a porta 8000 do contêiner.
+    ports:
+      - "8000:8000"
+    # Monta volumes: Isso sincroniza seu código local com o código dentro do contêiner.
+    # Alterações no seu código local serão refletidas no contêiner sem precisar reconstruir a imagem,
+    # o que é ótimo para o desenvolvimento com --reload do Uvicorn.
+    volumes:
+      - ./app:/app/app      # Monta a pasta 'app' do host em '/app/app' no contêiner
+      - ./tests:/app/tests  # Monta a pasta 'tests' do host em '/app/tests' no contêiner
+    # Define variáveis de ambiente para o contêiner.
+    environment:
+      # Garante que as saídas (logs) do Python não fiquem armazenadas em buffer,
+      # aparecendo em tempo real no terminal.
+      - PYTHONUNBUFFERED=1
+    # O comando CMD no Dockerfile já é suficiente para rodar o Uvicorn,
+    # mas você poderia sobrescrevê-lo aqui se quisesse um comando diferente para este serviço.
+    # command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload # --reload aqui seria mais redundante devido aos volumes
+
+  # Serviço para rodar os testes.
+  # Usa a mesma imagem da API para garantir consistência.
+  # Ele não precisa expor portas se for apenas para testes.
+  tests:
+    build: .
+    # Substitui o comando CMD padrão do Dockerfile para rodar os testes.
+    command: pytest
+    # Monta os mesmos volumes para que o pytest possa acessar seu código e testes.
+    volumes:
+      - ./app:/app/app
+      - ./tests:/app/tests
+    # depends_on:
+    #   - api # Descomente esta linha se seus testes de integração precisarem que a API esteja rodando e acessível via rede.
+    #         # Para isso, você precisaria configurar o cliente de teste para apontar para "http://api:8000" no teste_api.py.
