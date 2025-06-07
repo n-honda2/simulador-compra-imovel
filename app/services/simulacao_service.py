@@ -1,5 +1,5 @@
-import math
 from app.schemas.simulacao_base import SimulacaoRequest, SimulacaoResponse
+
 
 def calcular_simulacao(request_data: SimulacaoRequest) -> SimulacaoResponse:
     """
@@ -22,7 +22,7 @@ def calcular_simulacao(request_data: SimulacaoRequest) -> SimulacaoResponse:
         valor_entrada=valor_entrada,
         valor_financiado=valor_financiado,
         total_a_guardar=total_a_guardar,
-        parcela_mensal=parcela_mensal
+        parcela_mensal=parcela_mensal,
     )
 
     return response
