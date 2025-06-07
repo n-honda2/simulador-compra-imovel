@@ -83,7 +83,7 @@ Activate your `venv` to ensure you're using the correct Python environment:
 With your virtual environment active, install all required packages:
 
 ```bash
-pip install -r requirements.txt
+pip install -r venv_requirements.txt
 ```
 
 ### 6\. Run the API
@@ -95,7 +95,7 @@ uvicorn app.main:app --reload
 ```
 
   * The API will be available at: `http://127.0.0.1:8000`
-  * Access the **interactive documentation (Swagger UI)** at: `http://127.00.0.1:8000/docs`
+  * Access the **interactive documentation (Swagger UI)** at: `http://127.0.0.1:8000/docs`
   * View the ReDoc documentation at: `http://127.0.0.1:8000/redoc`
 
 -----
@@ -139,6 +139,47 @@ The API simulates real estate financing via a **`POST`** request to the `/simula
 
 -----
 
+### Usage Example with cURL
+
+You can test this endpoint using cURL in your terminal:
+
+```bash
+curl -X POST \
+  http://127.0.0.1:8000/simulacao \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "valor_imovel": 400000,
+    "percentual_entrada": 5,
+    "anos_contrato": 3
+  }'
+```
+
+-----
+
+## ✅ Tests
+
+This project includes **unit and integration tests** to ensure the robustness and correctness of its functionalities. We use **`pytest`** as our testing framework.
+
+### How to Run Tests
+
+1.  **Activate your virtual environment.**
+2.  From the project root directory, execute:
+    ```bash
+    pytest
+    ```
+    This command will automatically discover and run all tests within the `tests/` directory (including unit and integration tests).
+
+### Types of Tests
+
+  * **Unit Tests (`tests/unit/`)**: Focus on validating small, isolated units of code. In this project, they verify:
+      * The correct validation and structure of **Pydantic models** (`schemas`).
+      * The accuracy of **calculations and business rules** within the service layer (`services`).
+  * **Integration Tests (`tests/integration/`)**: Verify the interaction between different API components by simulating HTTP requests. They ensure that:
+      * API endpoints respond correctly to various request types.
+      * The integration between the router, services, and data models works as expected.
+
+-----
+
 ## 👨‍💻 Code Maintenance Guidelines
 
 To ensure the long-term quality, readability, and consistency of this codebase, please adhere to the following guidelines when contributing:
@@ -160,4 +201,4 @@ To ensure the long-term quality, readability, and consistency of this codebase, 
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](https://www.google.com/search?q=LICENSE) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](https://opensource.org/licenses/MIT) file for more details.
